@@ -7,8 +7,8 @@ from PyQt5.QtCore import *
 from PyQt5 import QtWidgets
 
 form = uic.loadUiType("Mkalendar.ui")[0]
-
 class Mkalendar(QMainWindow, form) :
+
 
     def __init__(self):
         super().__init__()
