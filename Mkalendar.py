@@ -1,49 +1,45 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
-
-"""
-ZetCode PyQt5 tutorial
-
-This program creates a menubar. The
-menubar has one menu with an exit action.
-
-author: Jan Bodnar
-website: zetcode.com
-last edited: January 2015
-"""
-
 import sys
-from PyQt5.QtWidgets import QMainWindow,QWidget, QAction, qApp, QApplication, QCalendarWidget
-from PyQt5.QtGui import QIcon
 
+from PyQt5 import uic
+from PyQt5 import QtCore
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5 import QtWidgets
 
-class Mkcalendar(QWidget):
+form = uic.loadUiType("Mkalendar.ui")[0]
+
+class Mkalendar(QMainWindow, form) :
+
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.setUi()
+        self.setEvent()
 
-    def initUI(self):
-        exitAction = QAction(QIcon('exit.png'), '&Exit', self)
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(qApp.quit)
+        # calendarWidget = QCalendarWidget()
+        self.calMain.clicked[QtCore.QDate].connect(self.slotClicked)
 
-        # cal = QCalendarWidget()
-        # self.addDockWidget(cal)
+    def setUi(self):
+        self.setupUi(self)
 
-        self.statusBar()
-        # QCalendarWidget.create()
+    def setEvent(self):
+        self.pushButton.clicked.connect(self.test)
+        # self.cal
 
-        menubar = self.menuBar()
-        fileMenu = menubar.addMenu('&File')
-        fileMenu.addAction(exitAction)
+    def slotClicked(self, date):
+        QtWidgets.QMessageBox.information(self, "QCalendarWidget Date Selected", date.toString())
 
-        self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Menubar')
-        self.show()
+    def test(self):
+        print("A")
+
+    # def clickDate(self):
 
 
-if __name__ == '__main__':
+
+def main() :
     app = QApplication(sys.argv)
-    ex = Mkcalendar()
-    sys.exit(app.exec_())
+    w = Mkalendar()
+    w.show()
+    app.exec_()
+
+if __name__ == '__main__' :
+    main()
