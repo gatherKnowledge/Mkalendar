@@ -6,46 +6,218 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>753</width>
-    <height>601</height>
+    <width>920</width>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QCalendarWidget" name="calMain">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>631</width>
+      <x>10</x>
+      <y>10</y>
+      <width>381</width>
       <height>471</height>
      </rect>
     </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="firstDayOfWeek">
+     <enum>Qt::Monday</enum>
+    </property>
+    <property name="gridVisible">
+     <bool>true</bool>
+    </property>
+    <property name="horizontalHeaderFormat">
+     <enum>QCalendarWidget::ShortDayNames</enum>
+    </property>
+    <property name="navigationBarVisible">
+     <bool>true</bool>
+    </property>
+    <property name="dateEditEnabled">
+     <bool>false</bool>
+    </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>500</y>
-      <width>75</width>
-      <height>23</height>
+      <x>400</x>
+      <y>10</y>
+      <width>511</width>
+      <height>471</height>
      </rect>
     </property>
-    <property name="text">
-     <string>PushButton</string>
+    <property name="currentIndex">
+     <number>0</number>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>480</y>
-      <width>104</width>
-      <height>71</height>
-     </rect>
-    </property>
+    <widget class="QWidget" name="widget">
+     <attribute name="title">
+      <string>일정관리</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>181</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>선택날짜</string>
+         </property>
+         <widget class="QWidget" name="horizontalLayoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>160</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="lbDate">
+             <property name="text">
+              <string>XXXX년 XX월 XX일 (X)요일</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>일정</string>
+         </property>
+         <widget class="QListWidget" name="listWorkList">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>161</width>
+            <height>151</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnNewWork">
+          <property name="geometry">
+           <rect>
+            <x>80</x>
+            <y>180</y>
+            <width>91</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>생성</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>10</y>
+        <width>181</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>내용</string>
+         </property>
+         <widget class="QTextEdit" name="textEdit">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>161</width>
+            <height>401</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>10</y>
+        <width>111</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="title">
+          <string>버튼</string>
+         </property>
+         <widget class="QPushButton" name="pushButton">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>91</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>실행</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btnClose">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>50</y>
+            <width>91</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>닫기</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+    </widget>
    </widget>
   </widget>
  </widget>
