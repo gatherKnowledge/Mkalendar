@@ -134,10 +134,19 @@
            <string>생성</string>
           </property>
          </widget>
-         <zorder>listWorkList</zorder>
-         <zorder>btnNewWork</zorder>
-         <zorder>frame</zorder>
-         <zorder>frame</zorder>
+         <widget class="QPushButton" name="btnDelWork">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>50</y>
+            <width>61</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>삭제</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>
@@ -167,7 +176,7 @@
          <property name="title">
           <string>일정 내용</string>
          </property>
-         <widget class="QTextEdit" name="textEdit">
+         <widget class="QTextEdit" name="content">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -177,7 +186,7 @@
            </rect>
           </property>
          </widget>
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="title">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -224,7 +233,7 @@
          <property name="title">
           <string>실행</string>
          </property>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="btnSave">
           <property name="geometry">
            <rect>
             <x>10</x>

@@ -1,8 +1,16 @@
 from xml.etree.ElementTree import Element
+
 from xml.etree.ElementTree import SubElement
 from xml.etree.ElementTree import dump
 
 from Task import Task
+
+def mkXmlTotal(list):
+    Tasks = Element("Tasks")
+    for task in list:
+        sub = mkXml(task)
+        Tasks.append(sub)
+    return Tasks
 
 def mkXml(Task):
     xTask = Element("Task")
@@ -28,18 +36,9 @@ def indent(elem, level=0):
         if level and (not elem.tail or not elem.tail.strip()):
             elem.tail = i + "   "
 
-
 def parserXml(elem):
     Task.index = SubElement(elem, "index").text
     Task.date = SubElement(elem, "date").text
     Task.title = SubElement(elem, "title").text
     Task.content = SubElement(elem, "content").text
     return Task
-
-"""
-Task.content = "내용"
-Task.title = "제목"
-Task.date = "20161102"
-Task.index = "1"
-dump(mkXml(Task))
-"""

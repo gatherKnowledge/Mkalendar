@@ -15,55 +15,98 @@ form = uic.loadUiType("Mkalendar.ui")[0]
 class Mkalendar(QMainWindow, form):
 
 
+    # 초기화
     def __init__(self):
         super().__init__()
         self.setUi()
-        self.setData()
-        self.setEvent()
 
-    def setUi(self):
-        self.setupUi(self)
-        # self.addItems()
-        # self.initStyle()
-        # def initStyle(self):
-        # self.optionList.hide()
-
-    def setData(self):
+        #Data setting
         self.workStack = []
         self.chDate=self.calMain.selectedDate()
         self.dateClicked(self.chDate)
+        self.currIndex = -1
 
+        self.setEvent()
+
+    # UI 세팅
+    def setUi(self):
+        self.setupUi(self)
+
+    # 이벤트 세팅
     def setEvent(self):
         self.calMain.clicked[QtCore.QDate].connect(self.dateClicked)
         self.btnNewWork.clicked.connect(self.makeNewWork)
         self.btnClose.clicked.connect(self.closeEvent)
+        self.btnSave.clicked.connect(self.saveEvent)
+        self.listWorkList.clicked.connect(self.listItemClickEvent)
+
+        # TODO List
+        """
+        # 저장 버튼 이벤트
+        # 달력 해당 셀 색깔 변화 이벤트
+
+        """
+
 
 
     def makeNewWork(self):
+        Task.index = 0
         self.addItems(Task)
 
     def editItems(self):
         pass
 
+    def listItemClickEvent(self):
+        self.emptyText()
+        row = self.listWorkList.currentRow()
+        self.currIndex = row
+        title = self.workStack[row].title
+        content = self.workStack[row].content
+
+        if title :
+            self.editTitle(title)
+        if content :
+            self.editContent(content)
+
+    def emptyText(self):
+        self.content.clear()
+        self.title.clear()
+
+    # 제목 수정
+    def editTitle(self, title):
+        self.title.setText(title)
+
+    # 내용 수정
+    def editContent(self, content):
+        self.content.setText(content)
+
+
+    def addBefore(self, Task):
+        self.listWorkList.addItem(Task.title)
+        self.workStack.append(Task)
+
+    def addNew(self, Task):
+        # index확인
+        if self.currIndex is not -1:
+            row = self.currIndex
+            bTask = self.workStack[row]
+            bTask.title = self.title.text()
+            bTask.content = self.content.toPlainText()
+            print(self.workStack)
+            print(row)
+            self.workStack.insert(row, bTask)
+        self.listWorkList.addItem("새 일정")
+        pTask = Task("", self.chDate, "새일정", "")
+        self.workStack.append(pTask)
+
     def addItems(self, Task):
-        # 날짜 누르기 전
-        # if type(self.chDate) != str:
-        #     QtWidgets.QMessageBox.information(self, "Warning", "날짜가 선택되지 않았습니다.")
-        #     return
-
         # 새로운 객체 생성 할 때
-        if Task :
-            self.listWorkList.addItem("새 일정")
-            Task.title = "새일정"
-            self.workStack.append(Task)
-
+        if Task.index == 0:
+            self.addNew(Task)
         #기존 것 추가해주는 이벤트 일 때
         else:
             # 기존 것에서 받고 list에 넣고
-            self.listWorkList.addItem(Task.title)
-            self.workStack.append(Task)
-
-
+            self.addBefore(Task)
         #현재 stack
         print("현재 목록 수 : %s" % self.listWorkList.count())
         print("현재 stack 목록 수 : %s" % len(self.workStack))
@@ -78,37 +121,27 @@ class Mkalendar(QMainWindow, form):
                 break ;
 
     def dateClicked(self, date):
+        self.emptyText()
         # paint = QtWidgets.QPainter
         # paint.setBackground("RED")
         # self.calMain.paintCell(paint,date)
         # 이미지 파일
-        # self.optionList.show()
-        # QtWidgets.QMessageBox.information(self, "QCalendarWidget Date Selected", date.toString())
         sDate = date.toString("yyyy년 MM월 dd일 (ddd)요일")
         self.chDate = date.toString("yyyyMMdd")
-        # sDate = str(date.year())+ str(date.day())+ str(date.month())
-        # type(sDate
-        # self.lbDate.setText(self._translate("MainWindow", "XXXX년 XX월 XX일"))
         self.lbDate.setText(sDate)
         # 아이템 삭제
         self.emptyList()
         self.workStack.clear()
 
-
-
-
         # 파일 내용
-        saveData = FileIo.isAnyFile()
+        saveData = FileIo.isAnyFile(self.chDate)
         if saveData :
             #있다
-            # Task.date=
-            # Task.title=''
-            # Task.content=''
-            # Task.index=''
             # 정렬 할 수있으면 하는것이 좋을듯 index를 기준으로
             # return list
             # list = FileIo.findTask(Task)
             list = FileIo.getTasks(self.chDate)
+            print(list)
             for t in list:
                 self.addItems(t)
 
@@ -125,6 +158,17 @@ class Mkalendar(QMainWindow, form):
                 self.addItems(fTask)
         else:pass
 
+    def saveEvent(self):
+        # self.tClick()
+        # TODO
+        xml = XmlMaker.mkXmlTotal(self.workStack)
+        FileIo.newXml(xml, self.chDate)
+
+
+
+    def tClick(self):
+        QMessageBox.information(self, "CLICK", "CLICK")
+
     # x btn click event name
     def closeEvent(self, event):
         qApp.exit()
@@ -139,16 +183,11 @@ class Mkalendar(QMainWindow, form):
             if reply == QMessageBox.Yes  :
                 qApp.exit()
             else :
-                pass
-        else :
-            if reply == QMessageBox.Yes  :
+                passaddItemses  :
                 event.accept()
             else :
                 event.ignore()
     """
-    def test(self):
-        print("A")
-
 
 def main():
     app = QApplication(sys.argv)
