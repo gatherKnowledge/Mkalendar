@@ -4,7 +4,7 @@ from xml.etree.ElementTree import dump
 from xml.etree.ElementTree import ElementTree as elemt
 from xml.etree import ElementTree
 
-path = "C:\\Users\\Company_SH\\Desktop\\"
+path = "C:\\Users\\Company_SH\\Desktop\\test\\"
 pFileName = "tasks"
 
 
@@ -81,7 +81,6 @@ def getTasks(date):
 # return type --> element
 def findTask(Task):
     root = getElemRoot()
-    #
     print("file s","*"*50)
     dump(root)
     print("file e","*"*50)
