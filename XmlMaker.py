@@ -1,8 +1,5 @@
 from xml.etree.ElementTree import Element
-
 from xml.etree.ElementTree import SubElement
-from xml.etree.ElementTree import dump
-
 from Task import Task
 
 def mkXmlTotal(list):
@@ -11,6 +8,8 @@ def mkXmlTotal(list):
         sub = mkXml(task)
         Tasks.append(sub)
     return Tasks
+def mkXmlNoList(list):
+    return  Element("Tasks")
 
 def mkXml(Task):
     xTask = Element("Task")

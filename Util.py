@@ -7,8 +7,8 @@ import Task
 # * ---------------------------------- *
 def printBox(plist):
     # print(type(list))
+    print("\n"*10)
     if type(plist) is Task.Task:
-        print("하나")
         tmpList = [plist]
         plist = tmpList
     print("*", "-" * 34, "*")

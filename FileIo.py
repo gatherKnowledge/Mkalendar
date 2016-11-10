@@ -1,11 +1,24 @@
-from Task import Task
 import os
+from Task import Task
 from xml.etree.ElementTree import dump
 from xml.etree.ElementTree import ElementTree as elemt
 from xml.etree import ElementTree
+import re
 
 path = "C:\\Users\\Company_SH\\Desktop\\test\\"
 pFileName = "tasks"
+
+
+def getDateList():
+    list = []
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            list.append(file[len(pFileName):-4])
+    return list
+
+def delFile(date) :
+    if isAnyFile(date) :
+        os.remove(path+pFileName+date+".xml")
 
 
 def isAnyFile(date):
